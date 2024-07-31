@@ -13,3 +13,15 @@
     scrollbar-width: none;  /* Firefox */
   }
   
+  .task-title {
+    overflow-wrap: break-word; /* Ensures long words break and wrap */
+    word-wrap: break-word;     /* Older support for breaking long words */
+    white-space: normal;       /* Allows the text to wrap */
+  }
+  
+  .task-description {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+  

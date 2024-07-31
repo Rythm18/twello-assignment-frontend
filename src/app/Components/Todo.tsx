@@ -30,7 +30,7 @@ const Todo = ({ heading, tasks}: Taskboard) => {
 
   return (
     
-    <div className='w-full'>
+    <div className='w-[365px] '>
       <h2 className="text-2xl font-semibold mb-4">{heading}</h2>
         
         <Droppable droppableId={heading}>
@@ -45,14 +45,14 @@ const Todo = ({ heading, tasks}: Taskboard) => {
                 <Draggable key={task._id} draggableId={task._id} index={index}>
                   {(provided) => (
                     <li
-                      className="bg-gray-100 p-2 border rounded shadow-md mb-5"
+                      className="bg-gray-100 p-4 border rounded shadow-md mb-5 task-title"
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
                       <h3 className="text-gray-700 text-lg font-semibold">{task.title}</h3>
                       {task.description && (
-                        <p className="text-gray-400 mt-2">{task.description}</p>
+                        <p className="text-gray-400 mt-2 text-balance task-description">{task.description}</p>
                       )}
                       <p className={`text-white w-fit p-1 rounded-lg text-sm px-2 mt-2 ${getPriorityColor(task.priority)}`}>
                         {task.priority}
