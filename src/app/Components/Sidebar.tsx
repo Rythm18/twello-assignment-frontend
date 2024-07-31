@@ -1,13 +1,15 @@
 'use client';
 import Link from 'next/link'
 import React, { useState } from 'react'
-import Avatar from 'react-avatar';
+import { Avatar } from "flowbite-react";
 import AddTask from './Addtask';
+import { useRouter } from 'next/navigation';
 
-const Sidebar = () => {
-  
+const Sidebar = ({ name }: { name: string }) => {
+  const router = useRouter();
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     window.location.href = '/login';
   }
 
@@ -25,9 +27,9 @@ const Sidebar = () => {
       <aside className="w-72 p-4 h-screen bg-white border-r">
         
         <div className="mb-6">
-          <div className="flex space-x-2 items-center">
-          <Avatar googleId="118096717852922241760" size="40" round={true} />
-            <p className="text-xl font-semibold">Joe Gardner</p>
+          <div className="flex space-x-4 items-center">
+          <Avatar img="image.png" alt="avatar of Jese" status="online" rounded bordered statusPosition="bottom-right"  className='h-12 w-12'/>
+            <p className="text-xl font-bold">{name}</p>
           </div>
           <button  className="mt-3 w-full rounded-lg bg-slate-200 text-center p-2 hover:bg-slate-300" onClick={logout}>
               Logout
@@ -36,7 +38,7 @@ const Sidebar = () => {
         <nav className="space-y-2">
           <Link
             href="#"
-            className="flex items-center p-2 text-lg ont-semibold bg-slate-200 text-black bg-primary rounded-md"
+            className="flex items-center p-2 text-lg ont-semibold bg-slate-200 text-black bg-primary rounded-md hover:bg-slate-300"
             prefetch={false}
           >
             <HomeIcon className="w-5 h-5 mr-2" />
@@ -44,7 +46,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center p-2 text-lg text-gray-700 rounded-md"
+            className="flex items-center p-2 text-lg text-gray-700 rounded-md hover:bg-slate-100"
             prefetch={false}
           >
             <CircuitBoardIcon className="w-5 h-5 mr-2" />
@@ -52,7 +54,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center p-2 text-lg  text-gray-700 rounded-md"
+            className="flex items-center p-2 text-lg  text-gray-700 rounded-md hover:bg-slate-100"
             prefetch={false}
           >
             <SettingsIcon className="w-5 h-5 mr-2" />
@@ -60,7 +62,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center p-2 text-lg ont-semibold text-gray-700 rounded-md"
+            className="flex items-center p-2 text-lg ont-semibold text-gray-700 rounded-md hover:bg-slate-100"
             prefetch={false}
           >
             <GroupIcon className="w-5 h-5 mr-2" />
@@ -68,7 +70,7 @@ const Sidebar = () => {
           </Link>
           <Link
             href="#"
-            className="flex items-center p-2 text-lg ont-semibold text-gray-700 rounded-md"
+            className="flex items-center p-2 text-lg ont-semibold text-gray-700 rounded-md hover:bg-slate-100"
             prefetch={false}
           >
             <InfoIcon className="w-5 h-5 mr-2" />
@@ -82,7 +84,7 @@ const Sidebar = () => {
       </aside>
 
       <div className='h-screen content-end bg-white border-r p-3' >
-            <button className="flex items-center w-full bg-gray-200 p-2 rounded-lg">
+            <button className="flex items-center w-full bg-gray-200 p-2 rounded-lg hover:bg-slate-300">
                 <DownloadIcon  className='mr-4'/>
                 <div className='flex flex-col'>
                     <p>Download the app</p>

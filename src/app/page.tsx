@@ -23,7 +23,7 @@ export default function Home() {
   },[]);
   return (
     <main className="flex h-screen bg-[#F7F7F7]">
-    <Sidebar />
+    <Sidebar name={name ?? ''}/>
     <div className="">
       <Header name={name ?? ''}/>
       <Main />

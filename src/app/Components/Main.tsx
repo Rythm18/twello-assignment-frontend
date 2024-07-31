@@ -16,6 +16,7 @@ interface Task {
 
 const Main = () => {
   const [tasks, setTasks] = React.useState<Task[]>([]);
+  const [pendingUpdates, setPendingUpdates] = React.useState<{ taskId: string; status: string }[]>([]);
   const priorityOrder: Record<string, number> = {
     Low: 1,
     Medium: 2,
@@ -35,6 +36,31 @@ const Main = () => {
     fetchTasks();
   }, []);
 
+  // Function to update task status optimistically
+  const updateTaskStatus = async (taskId: string, newStatus: string) => {
+    console.log('Updating task status:', taskId, newStatus);
+    setTasks(prevTasks => 
+      prevTasks.map(task => 
+        task._id === taskId ? { ...task, status: newStatus } : task
+      )
+    );
+    try {
+      await fetch('http://localhost:5000/api/v1/task/updateTasksBatch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: JSON.stringify({ taskId , newStatus }),
+      });
+
+      setPendingUpdates([]);
+    } catch (error) {
+      console.error('Error updating tasks:', error);
+    }
+  };
+
+
   const onDragEnd = async (result: any) => {
     const { destination, source, draggableId } = result;
 
@@ -46,17 +72,9 @@ const Main = () => {
       return;
     }
 
-    await fetch('http://localhost:5000/api/v1/task/updateTask', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-      body: JSON.stringify({ taskId: draggableId, status: destination.droppableId }),
-    });
+    updateTaskStatus(draggableId, destination.droppableId);
 
-    fetchTasks();
-    
+    setPendingUpdates(prev => [...prev, { taskId: draggableId, status: destination.droppableId }]);
   };
 
   const sortedTasks = tasks.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);

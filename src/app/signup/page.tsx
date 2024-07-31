@@ -8,24 +8,26 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  
+  const [error, setError] = useState(''); 
+
   const router = useRouter();
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      router.push('/'); // Use router.push for client-side navigation
+      router.push('/');
     }
   }, [router]);
 
   const signup = async () => {
     try {
-      const response = await postUpRequest('/user/signup',username, email, password );
+      const response = await postUpRequest('/user/signup', username, email, password);
       const { token } = response;
       localStorage.setItem('token', token);
       localStorage.setItem('username', username);
-      router.push('/'); 
+      router.push('/');
     } catch (error) {
       console.error('Signup failed:', error);
+      setError('Signup failed. Please try again.'); 
     }
   };
 
@@ -33,7 +35,6 @@ const Signup = () => {
     setShowPassword(!showPassword);
   };
 
-  // Prevent form from refreshing the page
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     signup();
@@ -42,7 +43,8 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-white to-[#AFA3FF]">
       <div className='w-full max-w-md p-12 rounded-lg shadow-md bg-[#F0F0F0]'>
-        <h1 className='text-2xl font-bold text-center'> Welcome to <span className='text-purple-500'>Workflo!</span></h1>
+        <h1 className='text-2xl font-bold text-center justify-center'> Welcome to <span className='text-[#4534AC]'>Workflo!</span></h1>
+        <h2 className='text-red-800 text-center'>{error && <span className='text-red-500  text-center justify-center'>{error}</span>}</h2>  
         <form className='flex flex-col gap-4 mt-4' onSubmit={handleSubmit}>
           <input
             className='p-2 rounded-md bg-gray-200 w-full'

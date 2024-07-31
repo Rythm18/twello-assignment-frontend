@@ -8,7 +8,7 @@ export interface Props {
 
 const Feature = (props : Props) => {
   return (
-    <div className='flex bg-white rounded-lg w-full mr-5 ml-3 p-5'>
+    <div className='flex bg-white rounded-lg w-full mr-5 ml-3 p-5 hover:shadow-lg'>
         
          <Image src={props.image} width={75} height={75} alt='Logo' className='mr-5'/>
          <div>
