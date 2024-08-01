@@ -9,7 +9,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(''); 
-
+  const [buttonLoading, setButtonLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -19,6 +19,7 @@ const Signup = () => {
   }, [router]);
 
   const signup = async () => {
+    setButtonLoading(true);
     try {
       const response = await postUpRequest('/user/signup', username, email, password);
       const { token } = response;
@@ -28,7 +29,8 @@ const Signup = () => {
     } catch (error) {
       setError(String(error)); 
       console.error('Signup failed:', error);
-      
+    } finally {
+      setButtonLoading(false);
     }
   };
 
@@ -120,11 +122,29 @@ const Signup = () => {
               )}
             </button>
           </div>
-          <button
-            type='submit'
-            className='text-white rounded-lg bg-gradient-to-b from-[#4C38C2] to-[#2F2188] p-2'
+          <button 
+            type='submit' 
+            className='text-white rounded-lg bg-gradient-to-b from-[#4C38C2] to-[#2F2188] p-2 w-full flex items-center justify-center'
+            disabled={buttonLoading}
           >
-            Sign Up
+            {buttonLoading ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="animate-spin h-5 w-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.75v-1m0 17.5v-1M4.75 12h-1m17.5 0h-1M7.25 7.25l-.75-.75m12.5 12.5-.75-.75M7.25 16.75l-.75.75m12.5-12.5-.75.75"
+                />
+              </svg>
+            ) : (
+              'Sign Up'
+            )}
           </button>
         </form>
         <div>
