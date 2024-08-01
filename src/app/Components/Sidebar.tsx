@@ -28,7 +28,7 @@ const Sidebar = ({ name }: { name: string }) => {
         
         <div className="mb-6">
           <div className="flex space-x-4 items-center">
-          <Avatar img="image.png" alt="avatar of Jese" status="online" rounded bordered statusPosition="bottom-right"  className='h-12 w-12'/>
+          <Avatar img="image1.png" alt="avatar of Jese" status="online" rounded bordered statusPosition="bottom-right"  className='h-12 w-12'/>
             <p className="text-xl font-bold">{name}</p>
           </div>
           <button  className="mt-3 w-full rounded-lg bg-slate-200 text-center p-2 hover:bg-slate-300" onClick={logout}>
@@ -45,7 +45,7 @@ const Sidebar = ({ name }: { name: string }) => {
             Home
           </Link>
           <Link
-            href="#"
+            href="/hire"
             className="flex items-center p-2 text-lg text-gray-700 rounded-md hover:bg-slate-100"
             prefetch={false}
           >
@@ -53,7 +53,7 @@ const Sidebar = ({ name }: { name: string }) => {
             Boards
           </Link>
           <Link
-            href="#"
+            href="/hire"
             className="flex items-center p-2 text-lg  text-gray-700 rounded-md hover:bg-slate-100"
             prefetch={false}
           >
