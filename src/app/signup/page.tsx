@@ -8,7 +8,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(''); 
+  const [error, setError] = useState<string | null>(''); 
 
   const router = useRouter();
 
@@ -26,8 +26,9 @@ const Signup = () => {
       localStorage.setItem('username', username);
       router.push('/');
     } catch (error) {
+      setError(String(error)); 
       console.error('Signup failed:', error);
-      setError('Signup failed. Please try again.'); 
+      
     }
   };
 

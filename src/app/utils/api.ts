@@ -11,7 +11,14 @@ export const apiRequest = async (endpoint: string, method = 'GET') => {
       });
   
       if (!res.ok) {
-        throw new Error(`Network response was not ok: ${res.statusText}`);
+        const error = await res.json();
+        if(error.message) {
+        throw new Error(`${error.message}`);
+        }
+        else
+        {
+          throw new Error(`Network response was not ok: ${res.statusText}`);
+        }
       }
   
       return res.json();
@@ -33,7 +40,14 @@ export const apiRequest = async (endpoint: string, method = 'GET') => {
       });
   
       if (!res.ok) {
-        throw new Error(`Network response was not ok: ${res.statusText}`);
+        const error = await res.json();
+        if(error.message) {
+        throw new Error(`${error.message}`);
+        }
+        else
+        {
+          throw new Error(`Network response was not ok: ${res.statusText}`);
+        }
       }
   
       return res.json();
@@ -56,7 +70,14 @@ export const apiRequest = async (endpoint: string, method = 'GET') => {
       });
   
       if (!res.ok) {
-        throw new Error(`Network response was not ok: ${res.statusText}`);
+        const error = await res.json();
+        if(error.message) {
+        throw new Error(`${error.message}`);
+        }
+        else
+        {
+          throw new Error(`Network response was not ok: ${res.statusText}`);
+        }
       }
   
       return res.json();
@@ -78,7 +99,14 @@ export const apiRequest = async (endpoint: string, method = 'GET') => {
       });
   
       if (!res.ok) {
-        throw new Error(`Network response was not ok: ${res.statusText}`);
+        const error = await res.json();
+        if(error.message) {
+        throw new Error(`${error.message}`);
+        }
+        else
+        {
+          throw new Error(`Network response was not ok: ${res.statusText}`);
+        }
       }
   
       return res.json();
